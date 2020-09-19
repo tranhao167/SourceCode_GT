@@ -1,0 +1,286 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Fsoft_TaskDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="Fsoft_TaskDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Accounts" EntityType="Fsoft_TaskDBModel.Account" />
+    <EntitySet Name="Administrators" EntityType="Fsoft_TaskDBModel.Administrator" />
+    <EntitySet Name="Candidates" EntityType="Fsoft_TaskDBModel.Candidate" />
+    <EntitySet Name="Educations" EntityType="Fsoft_TaskDBModel.Education" />
+    <EntitySet Name="Employers" EntityType="Fsoft_TaskDBModel.Employer" />
+    <EntitySet Name="Roles" EntityType="Fsoft_TaskDBModel.Role" />
+    <EntitySet Name="Skills" EntityType="Fsoft_TaskDBModel.Skill" />
+    <EntitySet Name="sysdiagrams" EntityType="Fsoft_TaskDBModel.sysdiagram" />
+    <EntitySet Name="WorkExperiences" EntityType="Fsoft_TaskDBModel.WorkExperience" />
+    <AssociationSet Name="FK_Account_Role" Association="Fsoft_TaskDBModel.FK_Account_Role">
+      <End Role="Role" EntitySet="Roles" />
+      <End Role="Account" EntitySet="Accounts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Administrator_Account" Association="Fsoft_TaskDBModel.FK_Administrator_Account">
+      <End Role="Account" EntitySet="Accounts" />
+      <End Role="Administrator" EntitySet="Administrators" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Candidate_Account" Association="Fsoft_TaskDBModel.FK_Candidate_Account">
+      <End Role="Account" EntitySet="Accounts" />
+      <End Role="Candidate" EntitySet="Candidates" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Employer_Account" Association="Fsoft_TaskDBModel.FK_Employer_Account">
+      <End Role="Account" EntitySet="Accounts" />
+      <End Role="Employer" EntitySet="Employers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Education_Candidate" Association="Fsoft_TaskDBModel.FK_Education_Candidate">
+      <End Role="Candidate" EntitySet="Candidates" />
+      <End Role="Education" EntitySet="Educations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Skills_Candidate" Association="Fsoft_TaskDBModel.FK_Skills_Candidate">
+      <End Role="Candidate" EntitySet="Candidates" />
+      <End Role="Skill" EntitySet="Skills" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WorkExperience_Candidate" Association="Fsoft_TaskDBModel.FK_WorkExperience_Candidate">
+      <End Role="Candidate" EntitySet="Candidates" />
+      <End Role="WorkExperience" EntitySet="WorkExperiences" />
+    </AssociationSet>
+    <EntitySet Name="Blogs" EntityType="Fsoft_TaskDBModel.Blog" />
+    <AssociationSet Name="FK_Blog_Administrator" Association="Fsoft_TaskDBModel.FK_Blog_Administrator">
+      <End Role="Administrator" EntitySet="Administrators" />
+      <End Role="Blog" EntitySet="Blogs" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Account">
+    <Key>
+      <PropertyRef Name="AccName" />
+    </Key>
+    <Property Name="AccName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="RoleID" Type="Int32" Nullable="false" />
+    <Property Name="HasDeleted" Type="DateTime" Precision="0" />
+    <Property Name="Created" Type="DateTime" Precision="0" />
+    <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Modified" Type="DateTime" Precision="0" />
+    <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Role" Relationship="Fsoft_TaskDBModel.FK_Account_Role" FromRole="Account" ToRole="Role" />
+    <NavigationProperty Name="Administrators" Relationship="Fsoft_TaskDBModel.FK_Administrator_Account" FromRole="Account" ToRole="Administrator" />
+    <NavigationProperty Name="Candidates" Relationship="Fsoft_TaskDBModel.FK_Candidate_Account" FromRole="Account" ToRole="Candidate" />
+    <NavigationProperty Name="Employers" Relationship="Fsoft_TaskDBModel.FK_Employer_Account" FromRole="Account" ToRole="Employer" />
+  </EntityType>
+  <EntityType Name="Administrator">
+    <Key>
+      <PropertyRef Name="AdminID" />
+    </Key>
+    <Property Name="AdminID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AdminName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AccName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Account" Relationship="Fsoft_TaskDBModel.FK_Administrator_Account" FromRole="Administrator" ToRole="Account" />
+    <NavigationProperty Name="Blogs" Relationship="Fsoft_TaskDBModel.FK_Blog_Administrator" FromRole="Administrator" ToRole="Blog" />
+  </EntityType>
+  <EntityType Name="Candidate">
+    <Key>
+      <PropertyRef Name="CandID" />
+    </Key>
+    <Property Name="CandID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CandName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CandPhone" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CandGender" Type="Int32" Nullable="false" />
+    <Property Name="CandAddress" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="CandBirthday" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Interest" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="AccName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Startday" Type="DateTime" Precision="0" />
+    <Property Name="Link" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="ReReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="HasDeleted" Type="DateTime" Precision="0" />
+    <Property Name="Status" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Objective" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CandMajor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Account" Relationship="Fsoft_TaskDBModel.FK_Candidate_Account" FromRole="Candidate" ToRole="Account" />
+    <NavigationProperty Name="Educations" Relationship="Fsoft_TaskDBModel.FK_Education_Candidate" FromRole="Candidate" ToRole="Education" />
+    <NavigationProperty Name="Skills" Relationship="Fsoft_TaskDBModel.FK_Skills_Candidate" FromRole="Candidate" ToRole="Skill" />
+    <NavigationProperty Name="WorkExperiences" Relationship="Fsoft_TaskDBModel.FK_WorkExperience_Candidate" FromRole="Candidate" ToRole="WorkExperience" />
+    <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UpdateNew" Type="DateTime" Precision="0" />
+    <Property Name="UpdateTimes" Type="Int32" />
+    <Property Name="HasRejected" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Education">
+    <Key>
+      <PropertyRef Name="EduID" />
+    </Key>
+    <Property Name="EduID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Major" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="School" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LevelEdu" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Startday" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Endday" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="GPA" Type="Double" Nullable="false" />
+    <Property Name="CandID" Type="Int32" Nullable="false" />
+    <Property Name="HasDeleted" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Candidate" Relationship="Fsoft_TaskDBModel.FK_Education_Candidate" FromRole="Education" ToRole="Candidate" />
+  </EntityType>
+  <EntityType Name="Employer">
+    <Key>
+      <PropertyRef Name="EmpID" />
+    </Key>
+    <Property Name="EmpID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmpName" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
+    <Property Name="EmpPhone" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="EmpEmail" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AccName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="HasDeleted" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Account" Relationship="Fsoft_TaskDBModel.FK_Employer_Account" FromRole="Employer" ToRole="Account" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="RoleID" />
+    </Key>
+    <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="HasDeleted" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Accounts" Relationship="Fsoft_TaskDBModel.FK_Account_Role" FromRole="Role" ToRole="Account" />
+  </EntityType>
+  <EntityType Name="Skill">
+    <Key>
+      <PropertyRef Name="SkillID" />
+    </Key>
+    <Property Name="SkillID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TypeSkill" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="SkillName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CandID" Type="Int32" Nullable="false" />
+    <Property Name="HasDeleted" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Candidate" Relationship="Fsoft_TaskDBModel.FK_Skills_Candidate" FromRole="Skill" ToRole="Candidate" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="WorkExperience">
+    <Key>
+      <PropertyRef Name="ExpID" />
+    </Key>
+    <Property Name="ExpID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Position" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="WorkPlace" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="WorkTime" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CandID" Type="Int32" Nullable="false" />
+    <Property Name="HasDeleted" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Candidate" Relationship="Fsoft_TaskDBModel.FK_WorkExperience_Candidate" FromRole="WorkExperience" ToRole="Candidate" />
+  </EntityType>
+  <Association Name="FK_Account_Role">
+    <End Type="Fsoft_TaskDBModel.Role" Role="Role" Multiplicity="1" />
+    <End Type="Fsoft_TaskDBModel.Account" Role="Account" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="RoleID" />
+      </Principal>
+      <Dependent Role="Account">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Administrator_Account">
+    <End Type="Fsoft_TaskDBModel.Account" Role="Account" Multiplicity="0..1" />
+    <End Type="Fsoft_TaskDBModel.Administrator" Role="Administrator" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="AccName" />
+      </Principal>
+      <Dependent Role="Administrator">
+        <PropertyRef Name="AccName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Candidate_Account">
+    <End Type="Fsoft_TaskDBModel.Account" Role="Account" Multiplicity="0..1" />
+    <End Type="Fsoft_TaskDBModel.Candidate" Role="Candidate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="AccName" />
+      </Principal>
+      <Dependent Role="Candidate">
+        <PropertyRef Name="AccName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Employer_Account">
+    <End Type="Fsoft_TaskDBModel.Account" Role="Account" Multiplicity="0..1" />
+    <End Type="Fsoft_TaskDBModel.Employer" Role="Employer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="AccName" />
+      </Principal>
+      <Dependent Role="Employer">
+        <PropertyRef Name="AccName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Education_Candidate">
+    <End Type="Fsoft_TaskDBModel.Candidate" Role="Candidate" Multiplicity="1" />
+    <End Type="Fsoft_TaskDBModel.Education" Role="Education" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Candidate">
+        <PropertyRef Name="CandID" />
+      </Principal>
+      <Dependent Role="Education">
+        <PropertyRef Name="CandID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Skills_Candidate">
+    <End Type="Fsoft_TaskDBModel.Candidate" Role="Candidate" Multiplicity="1" />
+    <End Type="Fsoft_TaskDBModel.Skill" Role="Skill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Candidate">
+        <PropertyRef Name="CandID" />
+      </Principal>
+      <Dependent Role="Skill">
+        <PropertyRef Name="CandID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WorkExperience_Candidate">
+    <End Type="Fsoft_TaskDBModel.Candidate" Role="Candidate" Multiplicity="1" />
+    <End Type="Fsoft_TaskDBModel.WorkExperience" Role="WorkExperience" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Candidate">
+        <PropertyRef Name="CandID" />
+      </Principal>
+      <Dependent Role="WorkExperience">
+        <PropertyRef Name="CandID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Blog">
+    <Key>
+      <PropertyRef Name="BlogID" />
+    </Key>
+    <Property Name="BlogID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AdminID" Type="Int32" Nullable="false" />
+    <Property Name="ImageMain" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Subject" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ContentBlog" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Created" Type="DateTime" Precision="0" />
+    <Property Name="ModifiedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Modified" Type="DateTime" Precision="0" />
+    <Property Name="HasDeleted" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Administrator" Relationship="Fsoft_TaskDBModel.FK_Blog_Administrator" FromRole="Blog" ToRole="Administrator" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_Blog_Administrator">
+    <End Type="Fsoft_TaskDBModel.Administrator" Role="Administrator" Multiplicity="1" />
+    <End Type="Fsoft_TaskDBModel.Blog" Role="Blog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Administrator">
+        <PropertyRef Name="AdminID" />
+      </Principal>
+      <Dependent Role="Blog">
+        <PropertyRef Name="AdminID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0d4042c2a66f4db6b98ed88d86a76fa6" Name="Diagram1" ZoomLevel="64">
+        <EntityTypeShape EntityType="Fsoft_TaskDBModel.Account" Width="1.5" PointX="3" PointY="7.25" />
+        <EntityTypeShape EntityType="Fsoft_TaskDBModel.Administrator" Width="1.5" PointX="5.25" PointY="14.375" />
+        <EntityTypeShape EntityType="Fsoft_TaskDBModel.Candidate" Width="1.5" PointX="5.25" PointY="3.625" />
+        <EntityTypeShape EntityType="Fsoft_TaskDBModel.Education" Width="1.5" PointX="7.5" PointY="4.625" />
+        <EntityTypeShape EntityType="Fsoft_TaskDBModel.Employer" Width="1.5" PointX="5.25" PointY="11.25" />
+        <EntityTypeShape EntityType="Fsoft_TaskDBModel.Role" Width="1.5" PointX="0.75" PointY="8" />
+        <EntityTypeShape EntityType="Fsoft_TaskDBModel.Skill" Width="1.5" PointX="7.5" PointY="8.375" />
+        <EntityTypeShape EntityType="Fsoft_TaskDBModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Fsoft_TaskDBModel.WorkExperience" Width="1.5" PointX="7.5" PointY="1.5" />
+        <AssociationConnector Association="Fsoft_TaskDBModel.FK_Account_Role" />
+        <AssociationConnector Association="Fsoft_TaskDBModel.FK_Administrator_Account" />
+        <AssociationConnector Association="Fsoft_TaskDBModel.FK_Candidate_Account" />
+        <AssociationConnector Association="Fsoft_TaskDBModel.FK_Employer_Account" />
+        <AssociationConnector Association="Fsoft_TaskDBModel.FK_Education_Candidate" />
+        <AssociationConnector Association="Fsoft_TaskDBModel.FK_Skills_Candidate" />
+        <AssociationConnector Association="Fsoft_TaskDBModel.FK_WorkExperience_Candidate" />
+        <EntityTypeShape EntityType="Fsoft_TaskDBModel.Blog" Width="1.5" PointX="7.5" PointY="13.75" />
+        <AssociationConnector Association="Fsoft_TaskDBModel.FK_Blog_Administrator" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
